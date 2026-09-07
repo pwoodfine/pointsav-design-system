@@ -1271,7 +1271,23 @@
                   "scale": 1,
                   "thousandsSeparator": ",",
                   "prefix": "$",
-                  "when": "Per-Unit or per-share figures inside a table. Full dollars, never rescaled, even alongside $000s-scaled aggregate columns -- matches the '(in thousands, except per share/unit data)' convention. Corrected 2026-08-09 (twice): an earlier draft's proposed divide-by-1000 rescale was demonstrated live to destroy real precision (a distribution-year and a no-distribution-year both displayed as '0')."
+                  "when": "Per-Unit or per-share figures inside a table whose whole-dollar value is >= $1. Full dollars, never rescaled, even alongside $000s-scaled aggregate columns -- matches the '(in thousands, except per share/unit data)' convention. Corrected 2026-08-09 (twice): an earlier draft's proposed divide-by-1000 rescale was demonstrated live to destroy real precision (a distribution-year and a no-distribution-year both displayed as '0'). Carved out 2026-09-07: this 0-decimal-place rule does NOT apply below $1 -- see sub-dollar-per-unit-precision, which takes precedence for those values."
+                },
+                "sub-dollar-per-unit-precision": {
+                  "decimalPlaces": "variable",
+                  "minSignificantDigits": 2,
+                  "maxDecimalPlaces": 8,
+                  "rounding": "truncate",
+                  "thousandsSeparator": ",",
+                  "prefix": "$",
+                  "when": "A per-Unit or per-share figure inside a table whose true value is below $1 (abs(value) < 1) -- takes precedence over per-unit-table-figure's flat 0-decimal-place rule for exactly this range. Extend decimal places (truncating, never rounding) until at least 2 significant digits are visible, capped at 8 decimal places. Never render as '$0' -- a sub-dollar per-share/per-unit figure that truncates to zero at a fixed decimal count is precision loss on the one number the row exists to show.",
+                  "$extensions": {
+                    "com.pointsav.paper": {
+                      "operator_decision": "2026-08-31, project-proforma -- carve-out confirmed after applying the flat per-unit-table-figure rule literally to real figures (WCP Journal $0.000049/$0.000250, Bencal ShareCapital $0.0001) rendered all of them as '$0'. This token formalizes that decision fleet-wide; previously a local, unratified judgment call in tool-direct-hold-engine. Formalized as a DESIGN-TOKEN-CHANGE 2026-09-07 (project-design, master co-sign: operator, in-session).",
+                      "examples": "$0.000049 -> $0.000049 (2 sig figs at 6dp); $0.0001 -> $0.0001 (1 sig fig shown at 4dp, extend one more place to reach 2 if the source has more precision, e.g. $0.00010 is not fabricated precision -- use the source value's own precision, capped at maxDecimalPlaces); never collapse to $0.",
+                      "scope_note": "This token's scope is proforma/financial-report-layout documents only (per the parent token's own $description). Whether the truncate-never-round rule -- and by extension this carve-out -- should also reach signable legal instruments (e.g. a page_legal_instrument-rendered document) is a separate, unresolved scope question, not decided by this carve-out. See paper.number-format.legal-subscription-agreement and related legal-family entries, which currently carry their own independent conventions."
+                    }
+                  }
                 },
                 "aggregate-total-currency": {
                   "decimalPlaces": 0,
@@ -1292,9 +1308,14 @@
                   "in_table": "n/a"
                 },
                 {
-                  "type": "Per-Unit / per-share figures in a table",
+                  "type": "Per-Unit / per-share figures in a table, value >= $1",
                   "standalone": "n/a",
                   "in_table": "Full $, 0 dp, never rescaled"
+                },
+                {
+                  "type": "Per-Unit / per-share figures in a table, value < $1",
+                  "standalone": "n/a",
+                  "in_table": "min 2 significant digits, truncated, never rescaled to $0 -- see sub-dollar-per-unit-precision"
                 },
                 {
                   "type": "General $ totals (portfolio-level aggregates)",
