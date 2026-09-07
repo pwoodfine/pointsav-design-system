@@ -20,3 +20,24 @@ sections:
       <phone-number>
       contact@example.com
       example.com
+
+# Folded from corporate-authority.yaml (batch1 consolidation, 2026-09-07) — HTML
+# render variants alongside the Markdown template above. Sidebar's <po-box> line
+# added here (was missing in the source file; print variant already had it —
+# same field set now, no more drift between the two render targets).
+render:
+  html_sidebar: |
+    <strong>&lt;executive-name&gt;</strong><br>
+    &lt;executive-title&gt;<br><br>
+    &lt;company-name&gt;<br>
+    &lt;street-address&gt;<br>
+    &lt;address-line-2&gt;<br>
+    &lt;po-box&gt;<br>
+    &lt;city&gt;, &lt;region&gt; &lt;postal-code&gt;<br><br>
+    <a href="mailto:contact@example.com" style="color:var(--ps-accent); text-decoration:none;">contact@example.com</a><br>
+    &lt;phone-number&gt;
+  html_print: |
+    <h3>CONTACT FOR FURTHER INFORMATION:</h3>
+    <p>&lt;executive-name&gt;<br>&lt;executive-title&gt;</p>
+    <p>&lt;company-name&gt;<br>&lt;street-address&gt;<br>&lt;address-line-2&gt;<br>&lt;po-box&gt;<br>&lt;city&gt;, &lt;region&gt; &lt;postal-code&gt;</p>
+    <p>contact@example.com<br>&lt;phone-number&gt;<br>www.example.com</p>

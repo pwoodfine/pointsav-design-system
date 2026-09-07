@@ -26,3 +26,11 @@ sections:
       **Important notice regarding intellectual property and trademarks.**
 
       Woodfine Capital Projects, Woodfine Management Corp, PointSav Digital Systems, Totebox Orchestration, and Totebox Archive are trademarks owned by Woodfine Capital Projects Inc. This notice serves as a formal declaration of intellectual property rights, asserting continuous use in commerce regardless of the omission of the ™ symbol in the accompanying text. All operational and architectural system designations (including but not limited to PointSav Console OS, PointSav Infrastructure OS, PointSav MediaKit OS, PointSav Network OS, PointSav PrivateGit OS, PointSav Workplace OS, and Totebox OS) are proprietary structural wordmarks utilized exclusively within the PointSav Digital Systems architecture.
+  - heading: "5. TERMINAL EGRESS FORMATTING"
+    content: >
+      Rely purely on standard Markdown hierarchy for document structure. Maintain
+      clean, utilitarian visual egress. Do not append standard structural Markdown
+      tags like '###' at the bottom of public egress documents. (Folded from
+      ds-protocol-guide.yaml, batch1 consolidation, 2026-09-07 — known open
+      contradiction: DS-TKN-MEDIA-RELEASE.html currently ships a '###' terminator;
+      flagged, not resolved by this token change.)
