@@ -31,7 +31,8 @@ required_sections:
         # covers this wiki, unlike corporate/projects.
     forbidden_openers: ["X refers to", "X is a term used to describe"]
   body_h2_sections:
-    min_count: 3
+    min_count: tier_dependent  # see density_targets.scope_tiers.<tier>.h2_min (0-4);
+      # replaces the flat floor below — a narrow_definitional-scope subject needs zero H2s
     max_count: 6
     h3_for_supporting_detail: true
   what_this_is_not:
@@ -48,11 +49,38 @@ required_sections:
     no_governance_doc_refs: true
 
 density_targets:
-  standard:
-    word_range: [1200, 1800]
-    note: "replaces the old 750-1100w 'stub' ceiling with a density standard, not a raw
-      word-count ceiling — see quality-bar.yaml for the density check itself"
-  min_facts_per_100_words: 3
+  # Wikipedia-grounded scope-tier system (2026-09) — replaces the prior flat
+  # standard.word_range: [1200, 1800] floor. Two independent Playwright-measured
+  # passes over 44 real live Wikipedia articles found length tracks subject scope,
+  # not a uniform quality floor (real range 87-7,972 words); word count alone was
+  # the dominant driver of false REWRITE verdicts on otherwise-complete short
+  # articles. See pointsav-design-system research trail / project-editorial's
+  # BRIEF-editorial-programme-master.md §Track-B for the full evidence.
+  min_facts_per_100_words: 3   # unchanged — this is the real binding density check
+  binding_check: min_facts_per_100_words
+
+  hard_floor:
+    words: 250        # WP:STUB's own boundary
+    action: merge_or_expand   # never "pad to reach a target"
+  soft_ceiling:
+    words: 6000       # below this, length alone is never a defect (WP:SIZERULE)
+    split_at: 8000
+
+  scope_tiers:   # target scales with subject scope, not one number
+    narrow_definitional:      { words: [300, 900],   h2_min: 0 }
+    single_mechanism:         { words: [900, 2000],  h2_min: 2 }
+    multi_variant_or_survey:  { words: [2000, 5000], h2_min: 3 }
+    foundational_survey:      { words: [5000, 8000], h2_min: 4 }
+
+  tier_assignment: facet_count
+  # A facet = a jurisdiction, a variant, a distinct mechanism, or a materially
+  # different application the subject genuinely has, drawn from the article's
+  # own category's scope statement in categories.yaml. Human judgment call at
+  # authoring time (not automated) as of this token's ratification:
+  #   1 facet    -> narrow_definitional
+  #   2-4 facets -> single_mechanism
+  #   5-10 facets -> multi_variant_or_survey
+  #   >10 facets -> foundational_survey
 
 infobox:
   required_for: [organization, product, software, platform, named_service]
