@@ -344,3 +344,81 @@ one.
 - Open questions +1: should the six pre-V4 files be brought forward to V5
   canonical CSS? Scoped out of this pass by operator decision — see
   `proforma-reproducibility.md`.
+
+## 11. Pagination-robustness scaffold — `.chapter`/`.chapter-opener`/`.bridge`/`.takeaway` break rules (2026-09-07, from project-proforma)
+
+**Origin:** project-proforma's `tool-direct-hold-engine` (2026-08-13/22/23,
+`BRIEF-direct-hold-engine-fold-consolidation.md`) built a numbered
+chapter/exhibit scaffold for its Land-Parcel Flexibility document, then
+(2026-08-27/28) ported the same break-rule primitives into this
+`financial-report-layout` family as *additive, forward-compatible* rules —
+validated empirically by rendering 5 of 13 live table-token documents to PDF
+and confirming none currently need them (no live stranded-heading defect
+found in that set). Landed here as a DESIGN-RESEARCH contribution rather than
+silently kept local, since the mechanism is genuinely reusable: any
+multi-section report using `table.wide`/`section.block` (§1–§2 above) can hit
+the same class of pagination defect this scaffold prevents.
+
+**The defect this prevents:** a content block (a chart card, a data box, a
+captioned figure) split cleanly across a page boundary by WeasyPrint, because
+nothing told the renderer to keep it whole. `section.block{break-inside:avoid}`
+(§1) already protects whole `<table>` elements; it does not reach a `<div>`
+sitting directly inside a `section.chapter` wrapper, or a standalone caption/
+lead paragraph — that gap is what this scaffold closes.
+
+**The rules, generalized (no chapter numbering or Woodfine-specific
+styling — those are this document's own presentational choice, not part of
+the reusable mechanism):**
+
+```css
+/* Chapter-boundary pagination */
+.chapter{page-break-before:always}
+.chapter.chapter-continuous{page-break-before:auto}   /* opt out for a chapter that should flow, not force-break */
+
+/* Keep-together primitives -- apply to any block that must not split across a page */
+.chapter-opener{break-inside:avoid;page-break-inside:avoid}
+.bridge{break-before:avoid;page-break-before:avoid}    /* a transitional paragraph that must stay with what follows it */
+.chapter-head,.chart-card,.databox,.methodbox,.scopebox,.confidential-callout,.cap,.lead{
+  break-inside:avoid;page-break-inside:avoid
+}
+
+/* Heading-orphan protection, extending §7's existing utility-class pattern */
+h2,h3,h4,.stitle{break-after:avoid;page-break-after:avoid}
+```
+
+**Codegen rule:** when a component introduces its own boxed/callout element
+(a card, a captioned figure, a pull-quote — anything that reads as one visual
+unit), add it to the `break-inside:avoid` keep-together list rather than
+inventing a new rule per component. Chapter numbering (`.chapter`) is opt-in —
+a document using flat `table.wide` sections without chapters never needs it.
+
+**One rule intentionally left OUT of this generalization: `.takeaway`.** The
+source implementation styles it as `border-left:4px solid #164679` with
+`.takeaway strong{color:#164679}` — `#164679` is Woodfine's own brand blue
+(confirmed against `woodfine-media-assets/token-global-color.yaml`'s
+`woodfine-blue`), not a generic PointSav accent. The keep-together mechanics
+(`break-before:avoid;page-break-before:avoid`, already covered by the
+`.chapter-head,.chart-card,...` selector list above) are reusable; the accent
+color is not. A consuming application using this callout pattern should
+supply its own accent color (e.g. `border-left-color: var(--accent-primary,
+#111111)`), not this literal hex. Per `.agent/rules/design-tokens.md`'s
+tenant-neutrality rule (this archive), Woodfine's actual brand values stay in
+`woodfine-media-assets`, not forked in here — flagged to project-proforma
+separately rather than silently copied into this file's generic guidance.
+
+### Research-trail delta (V8–V9)
+- Done +1: pagination-robustness scaffold generalized from project-proforma's
+  real production validation (5 of 13 live documents rendered to PDF, 0
+  stranded-heading defects found with the scaffold applied).
+- New finding: the source implementation's one color-bearing rule
+  (`.takeaway`'s accent) hardcodes Woodfine's own brand blue rather than a
+  generic accent — excluded from this generalization; documented as a
+  tenant-substitution point instead.
+- Open question: should a "Presentation" variant of this family (chart/
+  bento-box handout style, scorecard/card/keymsg visual language — the other
+  half of project-proforma's contribution, `PRESENTATION_PROFORMA_CSS`) be
+  ratified as a new canonical Paper document family? Not resolved in this
+  pass — that CSS's entire `:root` scheme is Woodfine brand color end to end
+  (not just one rule), and minting new primitives for a new document family
+  is a bigger design decision than this pass's scope. Routed back to
+  project-design/operator as a follow-up, not decided here.
