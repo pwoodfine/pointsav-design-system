@@ -1,6 +1,6 @@
 schema_name: INDEX-TOPIC
 prose_source: content-wiki-documentation/.internal/style-guides/guide-reference.md
-version: 1.0.0-pilot
+version: 1.1.0-pilot
 applies_when: "frontmatter carries index_type: (any value)"
 
 required_sections:
@@ -8,15 +8,38 @@ required_sections:
   lead:
     no_h2_header: true
     opens_with_bolded_title: true
+    selection_criteria_recommended: true
+    selection_criteria_rule: "where a category's boundary is not self-evident from its
+      name, the lead should state what does and does not belong — WP:STANDALONE: 'an
+      explicit standard is often helpful to both readers... and other editors, to reduce
+      the tendency to include trivial or off-topic entries.' Not every Index Topic needs
+      this (a category like 'Applications' is self-evident); use judgment. Recommended,
+      not required — roughly half the Index Topics surveyed 2026-09-04 already have
+      self-evident-enough scope that forcing this everywhere would produce boilerplate
+      exclusion statements with no real information content."
   start_here:
     required: true
     max_words: 60
   groups:
     min_count: 1
+    annotation_required: true
+    annotation_rule: "every linked entry must carry a one-line description, not a bare
+      link — matches the AUTO-GENERATED MEMBERSHIP bullet convention already used
+      platform-wide (- [[slug]] — <short_description>). A group that lists bare
+      [[wikilinks]] with no description fails this check."
+    grouping_basis: "thematic, sequential, or lifecycle order — never alphabetical.
+      WP:CLN: 'Alphabetical ordering does not provide any additional value' — order
+      groups and the entries within them by how they relate to each other or to a
+      reader's task, not by name."
     intro_scope: "describes the subject matter the group covers — never the wiki's own
       coverage state, backlog, or migration status. A group intro is not the place to
       say a topic 'isn't yet cross-referenced' or is 'thin relative to scope' — either
-      write the missing content, or say nothing about its absence."
+      write the missing content, or say nothing about its absence. Positively: each
+      group's intro prose must state how its members relate to each other or to the
+      reader's task — not merely restate the heading. A group intro that could be
+      produced by copying the heading into a sentence (e.g. 'The board and management
+      instruments.' under a heading titled 'Board and management oversight') is a
+      defect, not a stub to fill in later."
   scope_note_optional:
     replaces: what_this_is_not
     required: false
