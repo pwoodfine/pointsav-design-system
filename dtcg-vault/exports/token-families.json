@@ -237,6 +237,12 @@
     {
       "pillar": "writing",
       "layer": "primitive",
+      "family": "table",
+      "member_count": 3
+    },
+    {
+      "pillar": "writing",
+      "layer": "primitive",
       "family": "voice",
       "member_count": 4
     },
@@ -269,6 +275,12 @@
       "layer": "semantic",
       "family": "register",
       "member_count": 7
+    },
+    {
+      "pillar": "writing",
+      "layer": "semantic",
+      "family": "table",
+      "member_count": 4
     }
   ]
 }

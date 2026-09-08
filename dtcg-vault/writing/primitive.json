@@ -3,6 +3,46 @@
   "$description": "Writing pillar — primitive layer. Objective, measurable craft constants sourced from project-editorial's house-core.md (the shared craft foundation beneath all five register guides). Tenant-agnostic — applies to every register, every profile, every tenant. The register/lexicon/disclaimer rule shapes in writing/semantic.json compose over these; tenant-specific vocabulary and legal-entity values live in a per-brand media-assets override (e.g. woodfine-media-assets), never here.",
   "writing": {
     "primitive": {
+      "table": {
+        "$type": "dimension",
+        "$description": "Wiki-article table geometry — promoted 2026-09-08 from app-mediakit-knowledge/static/tokens.css's --k-table-* CSS custom properties (live, working values — zebra striping, scroll-wrap, never-reflow behavior verified against real Wikipedia table conventions, BRIEF-wiki-infobox-table-tokens.md). Distinct from paper.primitive.table (print/legal document tables — different context, confirmed no overlap) and from writing.primitive.rhythm's prose typography (tables intentionally use a smaller font-size than running prose, matching real Wikipedia convention).",
+        "font-size": {
+          "$value": "0.9375rem",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-primitive-table-font-size",
+              "pillar": "writing",
+              "layer": "primitive",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        },
+        "cell-pad-x": {
+          "$value": "0.7rem",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-primitive-table-cell-pad-x",
+              "pillar": "writing",
+              "layer": "primitive",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        },
+        "cell-pad-y": {
+          "$value": "0.45rem",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-primitive-table-cell-pad-y",
+              "pillar": "writing",
+              "layer": "primitive",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        }
+      },
       "rhythm": {
         "$type": "number",
         "sentence-avg-words": {

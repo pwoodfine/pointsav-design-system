@@ -492,6 +492,9 @@
   --ps-paper-semantic-print-orphans: var(--ps-paper-primitive-page-print-orphans);
   --ps-paper-semantic-print-widows: var(--ps-paper-primitive-page-print-widows);
   --ps-paper-semantic-print-body-min-size: var(--ps-paper-primitive-page-print-body-min-size);
+  --ps-writing-primitive-table-font-size: 0.9375rem;
+  --ps-writing-primitive-table-cell-pad-x: 0.7rem;
+  --ps-writing-primitive-table-cell-pad-y: 0.45rem;
   --ps-writing-primitive-rhythm-sentence-avg-words: 18;
   --ps-writing-primitive-rhythm-sentence-fact-of-record-max: 25;
   --ps-writing-primitive-rhythm-paragraph-line-min: 3;
@@ -508,6 +511,10 @@
   --ps-writing-primitive-voice-credibility: mechanism-number-verifiable-claim;
   --ps-writing-primitive-voice-concrete-word: prefer-concrete-over-abstract;
   --ps-writing-primitive-loop-standard: draft-improves-draft;
+  --ps-writing-semantic-table-border: #c8ccd1;
+  --ps-writing-semantic-table-head-bg: #f8f9fa;
+  --ps-writing-semantic-table-head-ink: #202122;
+  --ps-writing-semantic-table-stripe: #eef0f2;
   --ps-writing-semantic-register-how-to: operational-imperative;
   --ps-writing-semantic-register-reference: neutral-factual-clause;
   --ps-writing-semantic-register-communications: institutional;

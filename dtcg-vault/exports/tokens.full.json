@@ -8663,6 +8663,46 @@
   },
   "writing": {
     "primitive": {
+      "table": {
+        "$type": "dimension",
+        "$description": "Wiki-article table geometry — promoted 2026-09-08 from app-mediakit-knowledge/static/tokens.css's --k-table-* CSS custom properties (live, working values — zebra striping, scroll-wrap, never-reflow behavior verified against real Wikipedia table conventions, BRIEF-wiki-infobox-table-tokens.md). Distinct from paper.primitive.table (print/legal document tables — different context, confirmed no overlap) and from writing.primitive.rhythm's prose typography (tables intentionally use a smaller font-size than running prose, matching real Wikipedia convention).",
+        "font-size": {
+          "$value": "0.9375rem",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-primitive-table-font-size",
+              "pillar": "writing",
+              "layer": "primitive",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        },
+        "cell-pad-x": {
+          "$value": "0.7rem",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-primitive-table-cell-pad-x",
+              "pillar": "writing",
+              "layer": "primitive",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        },
+        "cell-pad-y": {
+          "$value": "0.45rem",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-primitive-table-cell-pad-y",
+              "pillar": "writing",
+              "layer": "primitive",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        }
+      },
       "rhythm": {
         "$type": "number",
         "sentence-avg-words": {
@@ -8880,6 +8920,60 @@
       }
     },
     "semantic": {
+      "table": {
+        "$type": "color",
+        "$description": "Wiki-article table color roles — promoted 2026-09-08 from app-mediakit-knowledge's live --k-table-border/-head-bg/-head-ink/-stripe CSS custom properties. Light-mode values only in this pass; dark-mode values are real and live in the engine (--k-table-head-bg: #1b2027, --k-table-stripe: #14181d under html[data-theme=\"dark\"]) but not yet ported here — flagged, not silently dropped. See BRIEF-wiki-infobox-table-tokens.md.",
+        "border": {
+          "$value": "#c8ccd1",
+          "$description": "Close to but deliberately not aliased to primitive.json's color.neutral-30 (#cdd1d8) — kept as the engine's real live value rather than forcing an inexact match",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-semantic-table-border",
+              "pillar": "writing",
+              "layer": "semantic",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        },
+        "head-bg": {
+          "$value": "#f8f9fa",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-semantic-table-head-bg",
+              "pillar": "writing",
+              "layer": "semantic",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        },
+        "head-ink": {
+          "$value": "#202122",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-semantic-table-head-ink",
+              "pillar": "writing",
+              "layer": "semantic",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        },
+        "stripe": {
+          "$value": "#eef0f2",
+          "$description": "Live engine value is a runtime color-mix() (55% head-bg / 45% surface), not a flat literal — this is a static approximation of that computed result at the light-theme surface values, not a byte-exact port",
+          "$extensions": {
+            "com.pointsav.tokens": {
+              "id": "--ps-writing-semantic-table-stripe",
+              "pillar": "writing",
+              "layer": "semantic",
+              "family": "table",
+              "schemaVersion": 1
+            }
+          }
+        }
+      },
       "register": {
         "$type": "string",
         "$description": "Ordered formality/tone scale. Each level's $extensions.guide points at the mounted project-editorial register guide (the composition seam — the SCALE is a token here, the prose exemplar stays project-editorial-owned and mounted, never forked). Mount timing: depends on app-privategit-design's DESIGN-BUNDLE renderer for the editorial bundle — confirm before treating these as live-servable, not just structurally correct.",
