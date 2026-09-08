@@ -5,12 +5,52 @@ shared_by: [TOPIC, JOURNAL]
 
 infobox:
   applies_to: concrete_entities_only
-  fields: [name, type, category, status, related_entities]
+  scope:
+    required_for: [organization, product, software, platform, named_service]
+    forbidden_for: [concept, theory, pattern, process, financial_instrument]
   render: right_aligned_frontmatter_driven
   engine_status: not_yet_wired
-  note: "tracked as a future engine feature per BRIEF-wiki-content-structure-standards.md
-    O1 — this token defines the data contract now so drafting can populate frontmatter
-    ahead of the render component landing"
+  mobile_breakpoint: "640px"
+  mobile_behavior: "unfloat to full-width, stacked in normal document flow after the lead
+    paragraph -- matches real Wikipedia Minerva-skin behavior at this breakpoint (verified
+    live, 2026-09-08), not a reflow-to-cards or truncation pattern"
+  structural_base: "extends components/regional-market-topic/guide.md's rm-infobox HTML/ARIA
+    pattern (<aside>+<dl>/<dt>/<dd>, right-floated, ARIA-labelled) -- reuses that structure,
+    not its 7 market-analysis-specific fields, which don't apply to these 5 categories"
+  field_groups:
+    organization:
+      fields: [name, entity_type, founded, headquarters, industry, key_people, website, subsidiaries]
+      section_grouping: false
+    product:
+      fields: [name, product_type, inventor, manufacturer, inception, website]
+      section_grouping: false
+    software:
+      fields: [name, developer, released, operating_system, license, website]
+      optional_subgroup:
+        name: latest_release
+        fields: [version, release_date]
+      section_grouping: true  # the one category with real intra-box section headers, matching Wikipedia's own Infobox software practice (colspan=2 header rows, nested version subboxes)
+    platform:
+      fields: [name, developer, launched, status, distribution_model, compatibility]
+      optional_subgroup:
+        name: lineage
+        fields: [predecessor, successor]
+      section_grouping: false
+      note: "distribution_model, not pricing — this workspace's real platforms are
+        customer-owned/self-hosted, not SaaS (e.g. the Location Intelligence platform)"
+    named_service:
+      fields: [name, developer, launched, status, distribution_model, platform]
+      section_grouping: false
+  note: "Superseded the prior flat 5-field placeholder (name, type, category, status,
+    related_entities) with real per-category field groups — grounded in Fable+Opus
+    browser-in-the-loop research on real Wikipedia infobox templates (2026-09-08),
+    cross-checked against 5 real candidate articles in this workspace's own wikis. Full
+    research trail: BRIEF-wiki-infobox-table-tokens.md (project-design). Real gap found,
+    not resolved here: none of the 5 candidate articles have this data in frontmatter yet
+    — populating it is separate content work for project-editorial. Engine auto-render
+    from frontmatter (O1, BRIEF-wiki-content-structure-standards.md /
+    BRIEF-editorial-programme-master.md Queue #7) remains a distinct, unscheduled
+    follow-on — this token defines the target data contract only."
 
 tables:
   purpose: taxonomy_comparison_classification_data_only
@@ -24,7 +64,10 @@ tables:
     security/five-stage-supply-chain.md's 'Action today' column."
   max_columns: 6
   note: "beyond 6 columns becomes unreadable on mobile — split into two tables or a
-    linked sub-article instead"
+    linked sub-article instead. Deliberately more conservative than real Wikipedia
+    practice (verified 2026-09-08: Wikipedia comparison tables commonly run 12-22
+    columns, e.g. Comparison_of_e-book_readers at 22) — a considered mobile-first
+    tightening, not an unexamined guess. See BRIEF-wiki-infobox-table-tokens.md."
   formatting:
     numeric_columns: right_align
     row_striping: zebra
