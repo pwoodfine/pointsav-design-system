@@ -40,7 +40,6 @@ PointSav treats language as infrastructure. The six linguistic protocol files in
 | `protocol-comm.yaml` | Internal dispatch — asset distinction, routing classification |
 | `protocol-extract.yaml` | Deterministic parsing rules — zero AI inference, strict lexical grammar |
 | `protocol-legal.yaml` | Translation of market claims to structural facts — regulatory language standards |
-| `protocol-memo.yaml` | Executive ledger synthesis — memo structure, chain of authority |
 | `protocol-translate.yaml` | Bilingual boundary rules — proper noun locks, jurisdiction-specific term handling |
 
 `protocol-translate.yaml` is worth noting specifically. PointSav operates across Canada, the United States, Spain, and Mexico. The same investment concept — a Direct-Hold Solution — has a different legal designation in each jurisdiction. The protocol file encodes which terms are translatable and which must remain in their source language regardless of the document's target language. This prevents legal fracture from appearing in bilingual documents.

@@ -40,7 +40,6 @@ PointSav trata el lenguaje como infraestructura. Los seis archivos de protocolo 
 | `protocol-comm.yaml` | Despacho interno — distinción de activos, clasificación de enrutamiento |
 | `protocol-extract.yaml` | Reglas de análisis determinista — cero inferencia de IA, gramática léxica estricta |
 | `protocol-legal.yaml` | Traducción de afirmaciones de mercado a hechos estructurales — estándares de lenguaje regulatorio |
-| `protocol-memo.yaml` | Síntesis del libro mayor ejecutivo — estructura de memorandos, cadena de autoridad |
 | `protocol-translate.yaml` | Reglas de límite bilingüe — bloqueos de nombres propios, manejo de términos específicos por jurisdicción |
 
 `protocol-translate.yaml` merece una mención especial. PointSav opera en Canadá, Estados Unidos, España y México. El mismo concepto de inversión — una Solución de Tenencia Directa — tiene una designación legal diferente en cada jurisdicción. El archivo de protocolo codifica qué términos son traducibles y cuáles deben permanecer en su idioma original independientemente del idioma del documento. Esto previene la fractura legal en documentos bilingües.

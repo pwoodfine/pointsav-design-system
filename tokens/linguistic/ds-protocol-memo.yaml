@@ -7,6 +7,9 @@ version: "2.1.0"
 last_updated: "2026-03-28"
 
 principles:
+  - rule: "Conclusion-First Structure"
+    description: "Lead with the immutable conclusion (executive summary), then supporting
+      evidence, then execution directives. Never bury the conclusion under evidence."
   - rule: "Active, Decisive Voice"
     description: "Eliminate passive constructs. Use strong, mechanic-driven verbs."
   - rule: "Institutional Brutalism (DS-ADR-08)"
